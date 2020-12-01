@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+      <TargetFramework>netstandard2.1</TargetFramework>
+      <LangVersion>8.0</LangVersion>
+   </PropertyGroup>
+
+   <PropertyGroup>
+     <AssemblyName>SuperSimpleConductor.ConductorClient</AssemblyName>
+     <RootNamespace>SuperSimpleConductor.ConductorClient</RootNamespace>
+   </PropertyGroup>
+
+   <PropertyGroup>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+      <PackageId>SuperSimpleConductor.ConductorClient</PackageId>
+      <Authors>Erik Burger</Authors>
+      <Company>Mindcode</Company>
+      <Product>SuperSimpleConductor</Product>
+      <Description>A very minimal client for the Netflix Conductor API. Built using Refit.</Description>
+      <Version>0.1.5-alpha</Version>
+      <PackageTags>Netflix, Conductor, api, client</PackageTags>
+   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Refit" Version="5.2.4" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="5.2.4" />
+  </ItemGroup>
+
+</Project>

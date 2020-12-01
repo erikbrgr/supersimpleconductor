@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+      <TargetFramework>netstandard2.1</TargetFramework>
+      <LangVersion>8.0</LangVersion>
+   </PropertyGroup>
+
+   <PropertyGroup>
+      <AssemblyName>SuperSimpleConductor.ConductorWorker</AssemblyName>
+      <RootNamespace>SuperSimpleConductor.ConductorWorker</RootNamespace>
+   </PropertyGroup>
+   
+   <PropertyGroup>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+      <Version>0.1.5-alpha</Version>
+      <Authors>Erik Burger</Authors>
+      <Company>Mindcode</Company>
+      <Product>SuperSimpleConductor</Product>
+      <PackageTags>Netflix, Conductor, worker, background service</PackageTags>
+      <Description>A very minimal worker to quickly set up a .NET worker service to handle Netflix Conductor workflow tasks.</Description>
+   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConductorClient\ConductorClient.csproj" />
+  </ItemGroup>
+
+</Project>
