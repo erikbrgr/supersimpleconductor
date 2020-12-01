@@ -11,7 +11,6 @@
    </PropertyGroup>
    
    <PropertyGroup>
-      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
       <Authors>Erik Burger</Authors>
       <Company>Mindcode</Company>
       <Product>SuperSimpleConductor</Product>

@@ -11,7 +11,6 @@
    </PropertyGroup>
 
    <PropertyGroup>
-      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
       <PackageId>SuperSimpleConductor.ConductorClient</PackageId>
       <Authors>Erik Burger</Authors>
       <Company>Mindcode</Company>
