@@ -1,4 +1,4 @@
-name: .NET Core
+name: Build and Publish to Nuget
 
 on:
   push:
@@ -36,4 +36,4 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Pack with dotnet
-      run: dotnet pack --output nuget-packages --configuration Release -p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }} 
+      run: dotnet pack --output nuget-packages --configuration Release -p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}-rc${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }} 
