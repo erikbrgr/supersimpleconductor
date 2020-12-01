@@ -16,7 +16,7 @@ Again, a very simple implementation of a BackgroundService class to poll a Netfl
 
 _Coming soon._
 
-In the meanwhile, a good start is to just use ConductorWorker in the default `worker` template:
+In the meanwhile, the quickest way to start is to use the DI extension to add the ConductorWorker in the default `worker` template:
 
 ```
 namespace WorkerService1
@@ -32,7 +32,7 @@ namespace WorkerService1
           Host.CreateDefaultBuilder(args)
               .ConfigureServices((hostContext, services) =>
               {
-                 services.AddHostedService<ConductorWorker>();
+                 services.AddConductorWorker(hostContext.Configuration, new Uri(<CONDUCTOR_URL>));
               });
    }
 }
