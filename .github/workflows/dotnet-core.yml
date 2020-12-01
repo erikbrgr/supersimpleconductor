@@ -22,9 +22,6 @@ jobs:
     - name: Use GitVersion
       id: gitversion # step id used as reference for output values
       uses: gittools/actions/gitversion/execute@v0.9.7
-    - run: |
-        echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
-        echo "NuGetPreReleaseTagV2: ${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -36,4 +33,4 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Pack with dotnet
-      run: dotnet pack --output nuget-packages --configuration Release -p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}-rc${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }} 
+      run: dotnet pack --output nuget-packages --configuration Release -p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
