@@ -43,29 +43,41 @@ namespace SuperSimpleConductor.ConductorWorker
          try
          {
             // See if any tasks are ready to be picked up
-            Logger.LogInformation("Polling Conductor queue");
+            Logger.LogInformation("Polling Conductor queue (task domain: {TaskDomain})", taskDomain);
             var queue = await ConductorApi.GetQueue();
 
             foreach (var (taskTypeName, queuedCount) in queue)
             {
-               var taskName = taskTypeName;
-
-               // We're only interested in tasks within our domain
-               if (taskDomain != null)
-               {
-                  if (!taskName.StartsWith(taskDomain)) continue;
-                  // Get rid of the domain prefix
-                  taskName = taskName.Replace($"{taskDomain}:", "");
-               }
-
-               // We're not interested in system tasks
-               if (SystemTasks.Contains(taskName)) continue;
-
-               // We're only interested in the tasks we registered
-               if (!SupportedTaskTypes.TryGetValue(taskName, out Type taskType)) continue;
-
                if (queuedCount > 0)
                {
+                  var taskName = taskTypeName;
+
+                  Logger.LogDebug("Determining eligibility of task {TaskName}", taskName);
+
+                  // We're only interested in tasks within our domain
+                  if (taskDomain != null)
+                  {
+                     if (!taskName.StartsWith(taskDomain)) continue;
+                     // Get rid of the domain prefix
+                     Logger.LogDebug("Removing task domain {TaskDomain} from task {TaskName}", taskDomain, taskName);
+
+                     taskName = taskName.Replace($"{taskDomain}:", "");
+                  }
+
+                  // We're not interested in system tasks
+                  if (SystemTasks.Contains(taskName))
+                  {
+                     Logger.LogDebug("Task {TaskName} is a system task. Skipping", taskName);
+                     continue;
+                  }
+
+                  // We're only interested in the tasks we registered
+                  if (!SupportedTaskTypes.TryGetValue(taskName, out Type taskType))
+                  {
+                     Logger.LogDebug("Task {TaskName} is not registered with this worker. Skipping", taskName);
+                     continue;
+                  }
+
                   // Get more information on the task
                   Logger.LogInformation("Polling task {TaskName}", taskName);
                   var conductorTask = await ConductorApi.GetTask(taskName, taskDomain);

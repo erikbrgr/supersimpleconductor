@@ -25,14 +25,18 @@ namespace WorkerService1
    {
       public static void Main(string[] args)
       {
-         CreateHostBuilder(args).Build().Run();
+         CreateHostBuilder(args).Build()
+                                .RegisterWorkflowTasks()
+                                .Run();
       }
 
       public static IHostBuilder CreateHostBuilder(string[] args) =>
           Host.CreateDefaultBuilder(args)
               .ConfigureServices((hostContext, services) =>
               {
-                 services.AddConductorWorker(hostContext.Configuration, new Uri(<CONDUCTOR_URL>));
+                 services.AddConductorWorker(hostContext.Configuration, new Uri("<url of the Conductor api>"));
+
+                 services.AddWorkflowTasks("<assembly containing your worker tasks>");
               });
    }
 }
