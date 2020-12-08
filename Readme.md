@@ -18,7 +18,7 @@ _Coming soon._
 
 In the meanwhile, the quickest way to start is to use the DI extension to add the ConductorWorker in the default `worker` template:
 
-```
+```csharp
 namespace WorkerService1
 {
    public class Program
@@ -46,7 +46,7 @@ namespace WorkerService1
 
 By default, ConductorWorker polls Conductor every 5 seconds and does not use a [Task Domain](https://netflix.github.io/conductor/configuration/taskdomains/). The following snippet from `appsettings.json` configures polling to be every 3 minutes for the domain `poller`:
 
-```
+```json
    "ConductorSettings": {
       "QueuePollingIntervalInSeconds": 180,
       "TaskDomain": "poller"
