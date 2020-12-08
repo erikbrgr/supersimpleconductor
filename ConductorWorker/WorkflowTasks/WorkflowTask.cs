@@ -4,7 +4,6 @@ using SuperSimpleConductor.ConductorClient.Models;
 using SuperSimpleConductor.ConductorWorker.Extensions;
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SuperSimpleConductor.ConductorWorker.WorkflowTasks
@@ -72,9 +71,7 @@ namespace SuperSimpleConductor.ConductorWorker.WorkflowTasks
             }
             catch (Exception ex)
             {
-               var input = task.InputData != null ? string.Join("; ", task.InputData.Select(i => $"{i.Key}: {i.Value}")) : "";
-
-               Logger.LogError(ex, "Failed to execute {TaskType}. Input {Input}", TaskType, input);
+               Logger.LogError(ex, "Failed to execute {TaskType}", TaskType);
 
                return ex.GetType() == typeof(WorkflowTaskFailedException)
                    ? task.Failed(ex.Message, null)
