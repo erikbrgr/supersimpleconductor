@@ -52,18 +52,6 @@ namespace SuperSimpleConductor.ConductorWorker
                {
                   var taskName = taskTypeName;
 
-                  Logger.LogDebug("Determining eligibility of task {TaskName}", taskName);
-
-                  // We're only interested in tasks within our domain
-                  if (taskDomain != null)
-                  {
-                     if (!taskName.StartsWith(taskDomain)) continue;
-                     // Get rid of the domain prefix
-                     Logger.LogDebug("Removing task domain {TaskDomain} from task {TaskName}", taskDomain, taskName);
-
-                     taskName = taskName.Replace($"{taskDomain}:", "");
-                  }
-
                   // We're not interested in system tasks
                   if (SystemTasks.Contains(taskName))
                   {
@@ -71,10 +59,23 @@ namespace SuperSimpleConductor.ConductorWorker
                      continue;
                   }
 
+                  Logger.LogDebug("Determining eligibility of task {TaskName}", taskName);
+
+                  // We're only interested in tasks within our domain
+                  if (taskDomain != null)
+                  {
+                     if (!taskName.StartsWith(taskDomain)) continue;
+
+                     // Get rid of the domain prefix
+                     Logger.LogDebug("Removing task domain {TaskDomain} from task {TaskName}", taskDomain, taskName);
+
+                     taskName = taskName.Replace($"{taskDomain}:", "");
+                  }
+
                   // We're only interested in the tasks we registered
                   if (!SupportedTaskTypes.TryGetValue(taskName, out Type taskType))
                   {
-                     Logger.LogDebug("Task {TaskName} is not registered with this worker. Skipping", taskName);
+                     Logger.LogInformation("Task {TaskName} is not registered with this worker. Skipping", taskName);
                      continue;
                   }
 

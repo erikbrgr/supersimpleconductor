@@ -6,6 +6,7 @@ using SuperSimpleConductor.ConductorClient;
 using SuperSimpleConductor.ConductorWorker.Configuration;
 using SuperSimpleConductor.ConductorWorker.WorkflowTasks;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -40,22 +41,29 @@ namespace SuperSimpleConductor.ConductorWorker
 
          foreach (var assembly in workerTasksAssemblies)
          {
-            var workflowTaskAssembly = Assembly.Load(assembly);
+            try
+            {
+               var workflowTaskAssembly = Assembly.Load(assembly);
 
-            var workflowTaskTypes = workflowTaskAssembly.GetExportedTypes().Where(t => typeof(IWorkflowTask).IsAssignableFrom(t) && !t.IsAbstract);
-            if (workflowTaskTypes.Count() == 0)
-            {
-               Log.Warning("No workflow task types found in assembly {Assembly}", assembly);
-            }
-            else
-            {
-               foreach (var workflowTaskType in workflowTaskTypes)
+               var workflowTaskTypes = workflowTaskAssembly.GetExportedTypes().Where(t => typeof(IWorkflowTask).IsAssignableFrom(t) && !t.IsAbstract);
+               if (workflowTaskTypes.Count() == 0)
                {
-                  Log.Debug("Adding workflow task type {WorkflowTaskType}", workflowTaskType.Name);
-
-                  addWorkflowTaskMethod.MakeGenericMethod(workflowTaskType)
-                                       .Invoke(null, new object[] { services });
+                  Log.Warning("No workflow task types found in assembly {Assembly}", assembly);
                }
+               else
+               {
+                  foreach (var workflowTaskType in workflowTaskTypes)
+                  {
+                     Log.Debug("Adding workflow task type {WorkflowTaskType}", workflowTaskType.Name);
+
+                     addWorkflowTaskMethod.MakeGenericMethod(workflowTaskType)
+                                          .Invoke(null, new object[] { services });
+                  }
+               }
+            }
+            catch (FileNotFoundException)
+            {
+               Log.Warning("Could not find assembly {Assembly}. Copy the assembly to the right location or add a project reference to it.", assembly);
             }
          }
 
