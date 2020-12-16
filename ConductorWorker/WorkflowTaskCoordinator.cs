@@ -88,8 +88,8 @@ namespace SuperSimpleConductor.ConductorWorker
 
                   // Tell Conductor we're picking up the task
                   Logger.LogDebug("Sending acknowledgement for task {TaskId} ({TaskName})", taskId, taskName);
-                  var acknowledgementStatus = await ConductorApi.SendAcknowledgement(taskId);
-                  if(!acknowledgementStatus) continue;
+                  var isAcknowledgementSuccess = await ConductorApi.SendAcknowledgement(taskId);
+                  if(!isAcknowledgementSuccess) continue;
 
                   try
                   {
