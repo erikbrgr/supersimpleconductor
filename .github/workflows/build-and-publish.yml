@@ -3,8 +3,6 @@ name: Build and Publish to Nuget
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   build:
