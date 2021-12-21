@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30717.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConductorClient", "ConductorClient\ConductorClient.csproj", "{B496B90F-8E75-493B-A843-FCC34E5900A2}"
 EndProject
@@ -9,10 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConductorWorker", "Conducto
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{462F7273-2383-408C-8D97-8F752D92E55B}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		GitVersion.yml = GitVersion.yml
+		.github\workflows\build-and-publish.yml = .github\workflows\build-and-publish.yml
+		.github\workflows\build.yml = .github\workflows\build.yml
 		Readme.md = Readme.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWorker", "TestWorker\TestWorker.csproj", "{148F041C-D3A4-4199-AB89-C19E71D34D4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +32,10 @@ Global
 		{53E871E0-21D2-438F-972C-B79EE69193E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53E871E0-21D2-438F-972C-B79EE69193E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53E871E0-21D2-438F-972C-B79EE69193E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{148F041C-D3A4-4199-AB89-C19E71D34D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{148F041C-D3A4-4199-AB89-C19E71D34D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{148F041C-D3A4-4199-AB89-C19E71D34D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{148F041C-D3A4-4199-AB89-C19E71D34D4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,14 +18,10 @@
       <Description>A very minimal worker to quickly set up a .NET worker service to handle Netflix Conductor workflow tasks.</Description>
       <RepositoryUrl></RepositoryUrl>
       <PackageProjectUrl>https://github.com/erikbrgr/supersimpleconductor</PackageProjectUrl>
-      <Version>0.0.0</Version>
+      <Version>0.2.1</Version>
    </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="5.5.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />

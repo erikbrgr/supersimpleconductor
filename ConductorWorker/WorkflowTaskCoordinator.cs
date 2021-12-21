@@ -33,8 +33,8 @@ namespace SuperSimpleConductor.ConductorWorker
 
       public WorkflowTaskCoordinator(ConductorApi conductorApi,
                                      IServiceProvider serviceProvider,
-                                     IConductorApiExceptionHandler conductorApiExceptionHandler,
-                                     ILogger<WorkflowTaskCoordinator> logger)
+                                     ILogger<WorkflowTaskCoordinator> logger,
+                                     IConductorApiExceptionHandler conductorApiExceptionHandler = null)
       {
          ConductorApi = conductorApi;
          ServiceProvider = serviceProvider;
