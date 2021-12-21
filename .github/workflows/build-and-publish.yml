@@ -23,6 +23,6 @@ jobs:
       - name: Test
         run: dotnet test --no-restore --verbosity normal
       - name: Pack with dotnet
-        run: dotnet pack --output nuget-packages --configuration Release -p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+        run: dotnet pack --output nuget-packages --configuration Release
       - name: Push with dotnet
         run: dotnet nuget push 'nuget-packages/*.nupkg' --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
