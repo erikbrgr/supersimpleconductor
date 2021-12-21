@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Refit;
 using SuperSimpleConductor.ConductorClient;
 using SuperSimpleConductor.ConductorWorker.Extensions;
 using SuperSimpleConductor.ConductorWorker.WorkflowTasks;
@@ -21,8 +22,9 @@ namespace SuperSimpleConductor.ConductorWorker
          "DECISION", "HTTP", "JOIN", "KAFKA_PUBLISH" ,"LAMBDA" ,"SUB_WORKFLOW", "_deciderQueue", "FORK"
       };
 
-      private ConductorApi ConductorApi { get; }
+      private ConductorApi ConductorApi { get; set; }
       private IServiceProvider ServiceProvider { get; }
+      public IConductorApiExceptionHandler ConductorApiExceptionHandler { get; }
       private ILogger<WorkflowTaskCoordinator> Logger { get; }
 
       private IDictionary<string, Type> SupportedTaskTypes { get; } = new Dictionary<string, Type>
@@ -31,10 +33,12 @@ namespace SuperSimpleConductor.ConductorWorker
 
       public WorkflowTaskCoordinator(ConductorApi conductorApi,
                                      IServiceProvider serviceProvider,
+                                     IConductorApiExceptionHandler conductorApiExceptionHandler,
                                      ILogger<WorkflowTaskCoordinator> logger)
       {
          ConductorApi = conductorApi;
          ServiceProvider = serviceProvider;
+         ConductorApiExceptionHandler = conductorApiExceptionHandler;
          Logger = logger;
       }
 
@@ -89,7 +93,7 @@ namespace SuperSimpleConductor.ConductorWorker
                   // Tell Conductor we're picking up the task
                   Logger.LogDebug("Sending acknowledgement for task {TaskId} ({TaskName})", taskId, taskName);
                   var isAcknowledgementSuccess = await ConductorApi.SendAcknowledgement(taskId);
-                  if(!isAcknowledgementSuccess) continue;
+                  if (!isAcknowledgementSuccess) continue;
 
                   try
                   {
@@ -111,6 +115,10 @@ namespace SuperSimpleConductor.ConductorWorker
                   }
                }
             }
+         }
+         catch (ApiException aex) when (ConductorApiExceptionHandler != null)
+         {
+            ConductorApi = ConductorApiExceptionHandler.HandleException(aex, ConductorApi) ?? ConductorApi;
          }
          catch (Exception ex)
          {
