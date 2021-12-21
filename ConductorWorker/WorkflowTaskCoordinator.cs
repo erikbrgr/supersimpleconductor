@@ -116,9 +116,9 @@ namespace SuperSimpleConductor.ConductorWorker
                }
             }
          }
-         catch (ApiException aex) when (ConductorApiExceptionHandler != null)
+         catch (Exception ex) when (ConductorApiExceptionHandler != null)
          {
-            ConductorApi = ConductorApiExceptionHandler.HandleException(aex, ConductorApi) ?? ConductorApi;
+            ConductorApi = ConductorApiExceptionHandler.HandleException(ex, ConductorApi) ?? ConductorApi;
          }
          catch (Exception ex)
          {

@@ -38,7 +38,7 @@ namespace TestWorker
          Logger = logger;
       }
 
-      public ConductorApi HandleException(ApiException exception, ConductorApi conductorApi)
+      public ConductorApi HandleException(Exception exception, ConductorApi conductorApi)
       {
          Logger.LogError("Error calling Conductor api");
 
