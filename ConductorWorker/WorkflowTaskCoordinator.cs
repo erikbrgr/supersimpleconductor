@@ -11,7 +11,7 @@ namespace SuperSimpleConductor.ConductorWorker
 {
    public interface IWorkflowTaskCoordinator
    {
-      Task PollConductorQueue(string taskDomain);
+      Task PollConductorQueue(string taskDomain, bool sendAcknowledgement);
       void RegisterWorkflowTask(IWorkflowTask workflowTask);
    }
 
@@ -42,7 +42,7 @@ namespace SuperSimpleConductor.ConductorWorker
          Logger = logger;
       }
 
-      public async Task PollConductorQueue(string taskDomain)
+      public async Task PollConductorQueue(string taskDomain, bool sendAcknowledgement)
       {
          try
          {
@@ -90,10 +90,13 @@ namespace SuperSimpleConductor.ConductorWorker
 
                   var taskId = conductorTask.TaskId;
 
-                  // Tell Conductor we're picking up the task
-                  Logger.LogDebug("Sending acknowledgement for task {TaskId} ({TaskName})", taskId, taskName);
-                  var isAcknowledgementSuccess = await ConductorApi.SendAcknowledgement(taskId);
-                  if (!isAcknowledgementSuccess) continue;
+                  if (sendAcknowledgement)
+                  {
+                     // Tell Conductor we're picking up the task
+                     Logger.LogDebug("Sending acknowledgement for task {TaskId} ({TaskName})", taskId, taskName);
+                     var isAcknowledgementSuccess = await ConductorApi.SendAcknowledgement(taskId);
+                     if (!isAcknowledgementSuccess) continue;
+                  }
 
                   try
                   {

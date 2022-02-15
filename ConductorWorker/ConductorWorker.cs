@@ -23,7 +23,7 @@ namespace SuperSimpleConductor.ConductorWorker
       {
          while (!stoppingToken.IsCancellationRequested)
          {
-            await WorkflowTaskCoordinator.PollConductorQueue(Settings.TaskDomain);
+            await WorkflowTaskCoordinator.PollConductorQueue(Settings.TaskDomain, Settings.SendAck);
 
             await Task.Delay(Settings.QueuePollingIntervalInSeconds * 1000, stoppingToken);
          }

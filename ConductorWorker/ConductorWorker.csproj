@@ -18,7 +18,7 @@
       <Description>A very minimal worker to quickly set up a .NET worker service to handle Netflix Conductor workflow tasks.</Description>
       <RepositoryUrl></RepositoryUrl>
       <PackageProjectUrl>https://github.com/erikbrgr/supersimpleconductor</PackageProjectUrl>
-      <Version>0.2.2</Version>
+      <Version>0.3</Version>
    </PropertyGroup>
 
   <ItemGroup>

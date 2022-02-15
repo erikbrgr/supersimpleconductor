@@ -4,5 +4,7 @@
    {
       public int QueuePollingIntervalInSeconds { get; set; } = 5;
       public string TaskDomain { get; set; } = null;
+
+      public bool SendAck { get; set; } = false;
    }
 }
