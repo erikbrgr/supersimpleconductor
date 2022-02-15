@@ -19,7 +19,8 @@ namespace SuperSimpleConductor.ConductorWorker
    {
       private readonly List<string> SystemTasks = new List<string>
       {
-         "DECISION", "HTTP", "JOIN", "KAFKA_PUBLISH" ,"LAMBDA" ,"SUB_WORKFLOW", "_deciderQueue", "FORK"
+         "DECISION", "HTTP", "JOIN", "KAFKA_PUBLISH" ,"LAMBDA" ,"SUB_WORKFLOW", "_deciderQueue", "FORK",
+         "SWITCH", "INLINE"
       };
 
       private ConductorApi ConductorApi { get; set; }
