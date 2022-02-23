@@ -23,10 +23,14 @@ namespace SuperSimpleConductor.ConductorClient
          }
 
          var settings = new RefitSettings();
+         // Inject a custom logger so we can see the payloads sent to Conductor
+         settings.HttpMessageHandlerFactory = () => new HttpLoggingHandler();
          services.AddRefitClient<ConductorApi>(settings)
                  .ConfigureHttpClient(c => c.BaseAddress = conductorApiUri);
 
          return services;
       }
    }
+
+   
 }
