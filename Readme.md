@@ -1,3 +1,7 @@
+### ⚠️ Breaking Change ⚠️
+
+From version 0.3 of ConductorWorker, no acknowledgements (Ack) will be sent to Conductor when polling a task. This will break Conductor versions < 3.0. To re-enable Ack, use the `SendAck` configuration setting (see below).
+
 # SuperSimpleConductor
 
 SuperSimpleConductor allows for the quick and easy creation of a .NET Core Worker Service that polls a [Netflix Conductor](https://netflix.github.io/conductor/) instance for tasks and executes them when available.
