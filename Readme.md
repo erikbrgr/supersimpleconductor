@@ -56,3 +56,9 @@ By default, ConductorWorker polls Conductor every 5 seconds and does not use a [
 # `SendAck`
 
 In v3.0.0 of Conductor, the Ack API endpoint was deprecated and removed (see https://github.com/Netflix/conductor/issues/1623 for some details). The `SendAck` property allows you to turn calling the Ack API endpoint back on (it is `false` by default).
+
+```json
+   "ConductorSettings": {
+      "SendAck": true
+   }
+```
