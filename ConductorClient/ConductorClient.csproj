@@ -16,7 +16,7 @@
       <Company>Mindcode</Company>
       <Product>SuperSimpleConductor</Product>
       <Description>A very minimal client for the Netflix Conductor API. Built using Refit.</Description>
-      <Version>0.2.0</Version>
+      <Version>0.3</Version>
       <PackageTags>Netflix, Conductor, api, client</PackageTags>
       <RepositoryUrl></RepositoryUrl>
       <PackageProjectUrl>https://github.com/erikbrgr/supersimpleconductor</PackageProjectUrl>

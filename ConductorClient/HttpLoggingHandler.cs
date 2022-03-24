@@ -11,9 +11,8 @@ namespace SuperSimpleConductor.ConductorClient
 {
    public class HttpLoggingHandler : DelegatingHandler
     {
-        public HttpLoggingHandler(
-            HttpMessageHandler innerHandler = null
-        ): base(innerHandler ?? new HttpClientHandler())
+        public HttpLoggingHandler(HttpMessageHandler innerHandler = null)
+         : base(innerHandler ?? new HttpClientHandler())
         {
         }
 
@@ -22,7 +21,7 @@ namespace SuperSimpleConductor.ConductorClient
         {
             var req = request;
             var id = Guid.NewGuid().ToString();
-            var msg = $"[{id} -   Request]";
+            var msg = $"[{id} -  Request]";
 
             Debug.WriteLine($"{msg}========Start==========");
             Debug.WriteLine($"{msg} {req.Method} {req.RequestUri.PathAndQuery} {req.RequestUri.Scheme}/{req.Version}");
