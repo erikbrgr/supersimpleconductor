@@ -16,35 +16,9 @@ This is a very simple client built using Refit. The implemented API functions ar
 
 Again, a very simple implementation of a BackgroundService class to poll a Netflix Conductor instance and execute the tasks registered.
 
-## Sample Code
+## Getting Started
 
-_Coming soon._
-
-In the meanwhile, the quickest way to start is to use the DI extension to add the ConductorWorker in the default `worker` template:
-
-```csharp
-namespace WorkerService1
-{
-   public class Program
-   {
-      public static void Main(string[] args)
-      {
-         CreateHostBuilder(args).Build()
-                                .RegisterWorkflowTasks()
-                                .Run();
-      }
-
-      public static IHostBuilder CreateHostBuilder(string[] args) =>
-          Host.CreateDefaultBuilder(args)
-              .ConfigureServices((hostContext, services) =>
-              {
-                 services.AddConductorWorker(hostContext.Configuration, new Uri("<url of the Conductor api>"));
-
-                 services.AddWorkflowTasks("<assembly containing your worker tasks>");
-              });
-   }
-}
-```
+To get started, please read [Getting Started with Netflix Conductor in .NET using SuperSimpleConductor](https://betterprogramming.pub/getting-started-with-netflix-conductor-in-net-using-supersimpleconductor-ed8a02120c1).
 
 ### Configuration
 
